@@ -4,6 +4,12 @@ extends Control
 const MINING_DURATION_BASE = 2.0  # Tempo base de mineração em segundos
 const MINING_UPGRADE_REDUCTION = 0.2  # 20% de redução com upgrade
 const COMBAT_INTERVAL = 2.0  # Intervalo entre ataques em segundos
+const ARMOR_UPGRADE_HP_BONUS = 20  # HP adicional da armadura
+
+# Constantes de monstros
+const SLIME_HP = 30
+const SLIME_DAMAGE = 3
+const SLIME_COINS = 10
 
 # Referências aos nós da UI
 @onready var coins_label = $VBoxContainer/TopBar/HBoxContainer/MarginContainer/HBoxContainer/CoinsLabel
@@ -46,7 +52,13 @@ var mining_duration = MINING_DURATION_BASE
 var is_in_combat = false
 var player_hp = 100
 var player_max_hp = 100
-var current_monster = {"name": "Slime", "hp": 30, "max_hp": 30, "damage": 3, "coins": 10}
+var current_monster = {
+	"name": "Slime", 
+	"hp": SLIME_HP, 
+	"max_hp": SLIME_HP, 
+	"damage": SLIME_DAMAGE, 
+	"coins": SLIME_COINS
+}
 var combat_timer = 0.0
 
 # Upgrades comprados
@@ -165,7 +177,13 @@ func show_status_message(message: String) -> void:
 func _on_start_combat_pressed():
 	is_in_combat = true
 	player_hp = player_max_hp
-	current_monster = {"name": "Slime", "hp": 30, "max_hp": 30, "damage": 3, "coins": 10}
+	current_monster = {
+		"name": "Slime", 
+		"hp": SLIME_HP, 
+		"max_hp": SLIME_HP, 
+		"damage": SLIME_DAMAGE, 
+		"coins": SLIME_COINS
+	}
 	combat_timer = 0.0
 	start_combat_button.disabled = true
 	stop_combat_button.disabled = false
@@ -181,9 +199,11 @@ func _on_stop_combat_pressed():
 func _on_weapon_selected(index: int):
 	var weapon_name = weapon_option.get_item_text(index)
 	if weapon_name == "Sem Arma":
-		GameManager.equipped_weapon = ""
+		GameManager.equipped_weapon = ""  # Permitir desequipar
 	else:
-		GameManager.equip_weapon(weapon_name)
+		if not GameManager.equip_weapon(weapon_name):
+			show_status_message("Não foi possível equipar %s" % weapon_name)
+			return
 	update_combat_ui()
 
 func process_combat_round():
@@ -197,7 +217,13 @@ func process_combat_round():
 		GameManager.add_skill_xp("Combate", 15)
 		combat_status_label.text = "Status: %s derrotado! +%d moedas" % [current_monster["name"], current_monster["coins"]]
 		# Criar novo monstro
-		current_monster = {"name": "Slime", "hp": 30, "max_hp": 30, "damage": 3, "coins": 10}
+		current_monster = {
+			"name": "Slime", 
+			"hp": SLIME_HP, 
+			"max_hp": SLIME_HP, 
+			"damage": SLIME_DAMAGE, 
+			"coins": SLIME_COINS
+		}
 	else:
 		# Monstro ataca jogador
 		player_hp -= current_monster["damage"]
@@ -222,7 +248,7 @@ func _on_buy_armor_upgrade():
 	if GameManager.coins >= 150 and not has_armor_upgrade:
 		if GameManager.remove_coins(150):
 			has_armor_upgrade = true
-			player_max_hp = 120
+			player_max_hp = 100 + ARMOR_UPGRADE_HP_BONUS
 			player_hp = player_max_hp
 			upgrade2_buy_button.text = "Comprado"
 			upgrade2_buy_button.disabled = true
@@ -242,9 +268,9 @@ func _on_skill_xp_changed(skill_name: String, xp: int, level: int):
 		mining_progress_bar.value = xp_in_level
 
 func update_ui():
-	# Atualizar recursos
-	copper_amount_label.text = "Quantidade: %d" % GameManager.resources["Cobre"]
-	iron_amount_label.text = "Quantidade: %d" % GameManager.resources["Ferro"]
+	# Atualizar recursos (usar .get() para segurança)
+	copper_amount_label.text = "Quantidade: %d" % GameManager.resources.get("Cobre", 0)
+	iron_amount_label.text = "Quantidade: %d" % GameManager.resources.get("Ferro", 0)
 	
 	# Atualizar moedas
 	coins_label.text = "Moedas: %d" % GameManager.coins
