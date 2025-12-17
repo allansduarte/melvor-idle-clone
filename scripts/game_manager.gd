@@ -2,6 +2,10 @@ extends Node
 
 # Autoload script para gerenciar o estado global do jogo
 
+# Constantes
+const STARTING_WOOD = 10  # Madeira inicial para permitir crafting
+const XP_PER_LEVEL = 100  # XP necessário para subir de nível
+
 # Sinais
 signal resource_changed(resource_name: String, amount: int)
 signal coins_changed(amount: int)
@@ -12,7 +16,7 @@ signal combat_update(monster_hp: int, player_hp: int)
 var resources := {
 	"Cobre": 0,
 	"Ferro": 0,
-	"Madeira": 10,  # Iniciar com madeira para permitir crafting inicial
+	"Madeira": STARTING_WOOD,
 }
 
 # Moedas
@@ -65,8 +69,8 @@ func remove_coins(amount: int) -> bool:
 func add_skill_xp(skill_name: String, xp_amount: int) -> void:
 	if skills.has(skill_name):
 		skills[skill_name]["xp"] += xp_amount
-		# Sistema simples de level-up (100 XP por nível)
-		var new_level = 1 + int(skills[skill_name]["xp"] / 100)
+		# Sistema simples de level-up baseado em XP_PER_LEVEL
+		var new_level = 1 + int(skills[skill_name]["xp"] / XP_PER_LEVEL)
 		skills[skill_name]["level"] = new_level
 		skill_xp_changed.emit(skill_name, skills[skill_name]["xp"], new_level)
 

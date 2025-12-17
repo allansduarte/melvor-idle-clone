@@ -1,5 +1,10 @@
 extends Control
 
+# Constantes de balanceamento
+const MINING_DURATION_BASE = 2.0  # Tempo base de mineração em segundos
+const MINING_UPGRADE_REDUCTION = 0.2  # 20% de redução com upgrade
+const COMBAT_INTERVAL = 2.0  # Intervalo entre ataques em segundos
+
 # Referências aos nós da UI
 @onready var coins_label = $VBoxContainer/TopBar/HBoxContainer/MarginContainer/HBoxContainer/CoinsLabel
 
@@ -35,7 +40,7 @@ extends Control
 var is_mining = false
 var current_mining_resource = ""
 var mining_time = 0.0
-var mining_duration = 2.0  # segundos para minerar
+var mining_duration = MINING_DURATION_BASE
 
 # Estado de combate
 var is_in_combat = false
@@ -43,7 +48,6 @@ var player_hp = 100
 var player_max_hp = 100
 var current_monster = {"name": "Slime", "hp": 30, "max_hp": 30, "damage": 3, "coins": 10}
 var combat_timer = 0.0
-var combat_interval = 2.0  # Ataque a cada 2 segundos
 
 # Upgrades comprados
 var has_mining_upgrade = false
@@ -90,7 +94,7 @@ func _process(delta):
 	# Processar combate
 	if is_in_combat:
 		combat_timer += delta
-		if combat_timer >= combat_interval:
+		if combat_timer >= COMBAT_INTERVAL:
 			combat_timer = 0.0
 			process_combat_round()
 
@@ -110,9 +114,9 @@ func start_mining(resource_name: String):
 		
 		# Aplicar upgrade de mineração se comprado
 		if has_mining_upgrade:
-			mining_duration = 1.6  # 20% mais rápido
+			mining_duration = MINING_DURATION_BASE * (1.0 - MINING_UPGRADE_REDUCTION)
 		else:
-			mining_duration = 2.0
+			mining_duration = MINING_DURATION_BASE
 
 func complete_mining():
 	GameManager.add_resource(current_mining_resource, 1)
@@ -122,36 +126,41 @@ func complete_mining():
 	mining_progress.value = 0
 
 func _on_craft_wood_sword_pressed():
-	# Temporariamente usar madeira para teste (seria adicionada ao mining)
-	# Por simplificação, vamos permitir craft se tiver recursos suficientes
 	if GameManager.resources.get("Madeira", 0) >= 10:
 		GameManager.remove_resource("Madeira", 10)
 		GameManager.add_tool("Espada de Madeira", 1)
 		GameManager.add_skill_xp("Criação", 20)
-		# Adicionar à lista de armas disponíveis
-		if weapon_option.get_item_count() == 1:  # Só tem "Sem Arma"
-			weapon_option.add_item("Espada de Madeira")
+		add_weapon_to_dropdown("Espada de Madeira")
 		update_ui()
+		show_status_message("Espada de Madeira criada com sucesso!")
 	else:
-		# Mensagem de erro (simplificada)
-		print("Recursos insuficientes para Espada de Madeira")
+		show_status_message("Recursos insuficientes! Precisa de 10 Madeira.")
 
 func _on_craft_iron_sword_pressed():
 	if GameManager.resources.get("Ferro", 0) >= 15:
 		GameManager.remove_resource("Ferro", 15)
 		GameManager.add_tool("Espada de Ferro", 1)
 		GameManager.add_skill_xp("Criação", 40)
-		# Adicionar à lista de armas disponíveis
-		var found = false
-		for i in range(weapon_option.get_item_count()):
-			if weapon_option.get_item_text(i) == "Espada de Ferro":
-				found = true
-				break
-		if not found:
-			weapon_option.add_item("Espada de Ferro")
+		add_weapon_to_dropdown("Espada de Ferro")
 		update_ui()
+		show_status_message("Espada de Ferro criada com sucesso!")
 	else:
-		print("Recursos insuficientes para Espada de Ferro")
+		show_status_message("Recursos insuficientes! Precisa de 15 Ferro.")
+
+# Helper para adicionar arma ao dropdown se ainda não existir
+func add_weapon_to_dropdown(weapon_name: String) -> void:
+	var weapon_exists = false
+	for i in range(weapon_option.get_item_count()):
+		if weapon_option.get_item_text(i) == weapon_name:
+			weapon_exists = true
+			break
+	if not weapon_exists:
+		weapon_option.add_item(weapon_name)
+
+# Helper para mostrar mensagens ao usuário
+func show_status_message(message: String) -> void:
+	# Por enquanto apenas print, mas poderia ser um toast/notification na UI
+	print(message)
 
 func _on_start_combat_pressed():
 	is_in_combat = true
@@ -228,8 +237,9 @@ func _on_coins_changed(amount: int):
 func _on_skill_xp_changed(skill_name: String, xp: int, level: int):
 	if skill_name == "Mineração":
 		mining_level_label.text = "Nível de Mineração: %d" % level
-		mining_xp_label.text = "XP: %d / 100" % (xp % 100)
-		mining_progress_bar.value = xp % 100
+		var xp_in_level = xp % GameManager.XP_PER_LEVEL
+		mining_xp_label.text = "XP: %d / %d" % [xp_in_level, GameManager.XP_PER_LEVEL]
+		mining_progress_bar.value = xp_in_level
 
 func update_ui():
 	# Atualizar recursos
