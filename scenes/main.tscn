@@ -1,0 +1,583 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6cxj2wjq3bxa"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_7bx5h"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7bx5h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.15, 0.15, 0.2, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBar" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TopBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="CoinsLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Moedas: 0"
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Coleta" type="MarginContainer" parent="VBoxContainer/TabContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+metadata/_tab_index = 0
+
+[node name="MiningPanel" type="Panel" parent="VBoxContainer/TabContainer/Coleta"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Coleta/MiningPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Sistema de Mineração"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="SkillInfo" type="HBoxContainer" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/SkillInfo"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/SkillInfo/MarginContainer"]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/SkillInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Nível de Mineração: 1"
+
+[node name="XPLabel" type="Label" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/SkillInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "XP: 0 / 100"
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/SkillInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 100.0
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResourcesGrid" type="GridContainer" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="CopperPanel" type="Panel" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/ResourcesGrid"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/ResourcesGrid/CopperPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlaceholderRect" type="ColorRect" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/ResourcesGrid/CopperPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+color = Color(0.8, 0.5, 0.2, 1)
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/ResourcesGrid/CopperPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Cobre"
+horizontal_alignment = 1
+
+[node name="AmountLabel" type="Label" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/ResourcesGrid/CopperPanel/VBoxContainer"]
+layout_mode = 2
+text = "Quantidade: 0"
+horizontal_alignment = 1
+
+[node name="MineButton" type="Button" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/ResourcesGrid/CopperPanel/VBoxContainer"]
+layout_mode = 2
+text = "Minerar Cobre"
+
+[node name="IronPanel" type="Panel" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/ResourcesGrid"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/ResourcesGrid/IronPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlaceholderRect" type="ColorRect" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/ResourcesGrid/IronPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+color = Color(0.6, 0.6, 0.65, 1)
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/ResourcesGrid/IronPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Ferro"
+horizontal_alignment = 1
+
+[node name="AmountLabel" type="Label" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/ResourcesGrid/IronPanel/VBoxContainer"]
+layout_mode = 2
+text = "Quantidade: 0"
+horizontal_alignment = 1
+
+[node name="MineButton" type="Button" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/ResourcesGrid/IronPanel/VBoxContainer"]
+layout_mode = 2
+text = "Minerar Ferro"
+
+[node name="MiningProgress" type="Panel" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/MiningProgress"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StatusLabel" type="Label" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/MiningProgress/VBoxContainer"]
+layout_mode = 2
+text = "Status: Aguardando..."
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/TabContainer/Coleta/MiningPanel/VBoxContainer/MiningProgress/VBoxContainer"]
+layout_mode = 2
+
+[node name="Criação" type="MarginContainer" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+metadata/_tab_index = 1
+
+[node name="CraftingPanel" type="Panel" parent="VBoxContainer/TabContainer/Criação"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Criação/CraftingPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Sistema de Criação"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="RecipesGrid" type="GridContainer" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="WoodSwordPanel" type="Panel" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer/RecipesGrid"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer/RecipesGrid/WoodSwordPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlaceholderRect" type="ColorRect" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer/RecipesGrid/WoodSwordPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+color = Color(0.6, 0.4, 0.2, 1)
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer/RecipesGrid/WoodSwordPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Espada de Madeira"
+horizontal_alignment = 1
+
+[node name="RequirementsLabel" type="Label" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer/RecipesGrid/WoodSwordPanel/VBoxContainer"]
+layout_mode = 2
+text = "Requer: 10 Madeira"
+horizontal_alignment = 1
+
+[node name="DamageLabel" type="Label" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer/RecipesGrid/WoodSwordPanel/VBoxContainer"]
+layout_mode = 2
+text = "Dano: 5"
+horizontal_alignment = 1
+
+[node name="CraftButton" type="Button" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer/RecipesGrid/WoodSwordPanel/VBoxContainer"]
+layout_mode = 2
+text = "Criar"
+
+[node name="IronSwordPanel" type="Panel" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer/RecipesGrid"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer/RecipesGrid/IronSwordPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlaceholderRect" type="ColorRect" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer/RecipesGrid/IronSwordPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+color = Color(0.5, 0.5, 0.6, 1)
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer/RecipesGrid/IronSwordPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Espada de Ferro"
+horizontal_alignment = 1
+
+[node name="RequirementsLabel" type="Label" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer/RecipesGrid/IronSwordPanel/VBoxContainer"]
+layout_mode = 2
+text = "Requer: 15 Ferro"
+horizontal_alignment = 1
+
+[node name="DamageLabel" type="Label" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer/RecipesGrid/IronSwordPanel/VBoxContainer"]
+layout_mode = 2
+text = "Dano: 10"
+horizontal_alignment = 1
+
+[node name="CraftButton" type="Button" parent="VBoxContainer/TabContainer/Criação/CraftingPanel/VBoxContainer/RecipesGrid/IronSwordPanel/VBoxContainer"]
+layout_mode = 2
+text = "Criar"
+
+[node name="Combate" type="MarginContainer" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+metadata/_tab_index = 2
+
+[node name="CombatPanel" type="Panel" parent="VBoxContainer/TabContainer/Combate"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Combate/CombatPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Sistema de Combate Automático"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="WeaponSelection" type="Panel" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/WeaponSelection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/WeaponSelection/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Selecione sua arma:"
+horizontal_alignment = 1
+
+[node name="WeaponOption" type="OptionButton" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/WeaponSelection/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="CombatArea" type="HBoxContainer" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerPanel" type="Panel" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/CombatArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/CombatArea/PlayerPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlaceholderRect" type="ColorRect" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/CombatArea/PlayerPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+color = Color(0.2, 0.6, 0.2, 1)
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/CombatArea/PlayerPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Jogador"
+horizontal_alignment = 1
+
+[node name="HPLabel" type="Label" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/CombatArea/PlayerPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "HP: 100 / 100"
+horizontal_alignment = 1
+
+[node name="DamageLabel" type="Label" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/CombatArea/PlayerPanel/VBoxContainer"]
+layout_mode = 2
+text = "Dano: 1"
+horizontal_alignment = 1
+
+[node name="MonsterPanel" type="Panel" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/CombatArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/CombatArea/MonsterPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlaceholderRect" type="ColorRect" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/CombatArea/MonsterPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+color = Color(0.8, 0.2, 0.2, 1)
+
+[node name="MonsterName" type="Label" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/CombatArea/MonsterPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Slime"
+horizontal_alignment = 1
+
+[node name="HPLabel" type="Label" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/CombatArea/MonsterPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "HP: 30 / 30"
+horizontal_alignment = 1
+
+[node name="DamageLabel" type="Label" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/CombatArea/MonsterPanel/VBoxContainer"]
+layout_mode = 2
+text = "Dano: 3"
+horizontal_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ControlPanel" type="Panel" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/ControlPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StatusLabel" type="Label" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/ControlPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Status: Aguardando..."
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/ControlPanel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="StartCombatButton" type="Button" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/ControlPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Iniciar Combate"
+
+[node name="StopCombatButton" type="Button" parent="VBoxContainer/TabContainer/Combate/CombatPanel/VBoxContainer/ControlPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Parar Combate"
+
+[node name="Loja" type="MarginContainer" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+metadata/_tab_index = 3
+
+[node name="ShopPanel" type="Panel" parent="VBoxContainer/TabContainer/Loja"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Loja/ShopPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Loja"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ShopGrid" type="GridContainer" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="UpgradePanel1" type="Panel" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer/ShopGrid"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer/ShopGrid/UpgradePanel1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlaceholderRect" type="ColorRect" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer/ShopGrid/UpgradePanel1/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+color = Color(0.3, 0.5, 0.8, 1)
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer/ShopGrid/UpgradePanel1/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Picareta Melhorada"
+horizontal_alignment = 1
+
+[node name="DescLabel" type="Label" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer/ShopGrid/UpgradePanel1/VBoxContainer"]
+layout_mode = 2
+text = "+20% velocidade de mineração"
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer/ShopGrid/UpgradePanel1/VBoxContainer"]
+layout_mode = 2
+text = "Preço: 100 moedas"
+horizontal_alignment = 1
+
+[node name="BuyButton" type="Button" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer/ShopGrid/UpgradePanel1/VBoxContainer"]
+layout_mode = 2
+text = "Comprar"
+
+[node name="UpgradePanel2" type="Panel" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer/ShopGrid"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer/ShopGrid/UpgradePanel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlaceholderRect" type="ColorRect" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer/ShopGrid/UpgradePanel2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+color = Color(0.8, 0.3, 0.3, 1)
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer/ShopGrid/UpgradePanel2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Armadura Básica"
+horizontal_alignment = 1
+
+[node name="DescLabel" type="Label" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer/ShopGrid/UpgradePanel2/VBoxContainer"]
+layout_mode = 2
+text = "+20 HP máximo"
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer/ShopGrid/UpgradePanel2/VBoxContainer"]
+layout_mode = 2
+text = "Preço: 150 moedas"
+horizontal_alignment = 1
+
+[node name="BuyButton" type="Button" parent="VBoxContainer/TabContainer/Loja/ShopPanel/VBoxContainer/ShopGrid/UpgradePanel2/VBoxContainer"]
+layout_mode = 2
+text = "Comprar"
