@@ -1,0 +1,26 @@
+# Godot 4+ specific ignores
+.godot/
+*.import
+
+# Godot-specific files to ignore
+*.translation
+
+# System/tool-specific files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Build artifacts
+export_presets.cfg
+*.zip
+*.dmg
+*.app
+*.exe
+*.x86_64
+*.pck
+
+# Logs
+logs/
+*.log
